@@ -5,11 +5,21 @@
 <ul class="list-group">
     {% for rent in history %}
     <li class="list-group-item">
+        {% if session.role == 'admin' %}
+            {{ rent.username }} - {{ rent.name }} - {{ rent.status }} | Due: {{ rent.due_date }}
+        {% else %}
+            {{ rent.name }} - {{ rent.status }} | Due: {{ rent.due_date }}
+        {% endif %}
+    </li>
+    {% endfor %}
+<!-- 
+    {% for rent in history %}
+    <li class="list-group-item">
         {{ rent.name }} - {{ rent.status }} | Due: {{ rent.due_date }}
         {% if rent.status == 'approved' %}
         <a href="{{ url_for('return_car', rental_id=rent.id) }}" class="btn btn-danger btn-sm float-end">Return</a>
         {% endif %}
     </li>
-    {% endfor %}
+    {% endfor %} -->
 </ul>
 {% endblock %}
